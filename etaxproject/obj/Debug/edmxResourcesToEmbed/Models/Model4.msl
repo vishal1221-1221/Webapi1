@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="projecttModel3StoreContainer" CdmEntityContainer="projecttEntities6">
+    <EntitySetMapping Name="Elecreadings">
+      <EntityTypeMapping TypeName="projecttModel3.Elecreading">
+        <MappingFragment StoreEntitySet="Elecreading">
+          <ScalarProperty Name="UniQueHousNo" ColumnName="UniQueHousNo" />
+          <ScalarProperty Name="electricalserviceno" ColumnName="electricalserviceno" />
+          <ScalarProperty Name="unitsconsumed" ColumnName="unitsconsumed" />
+          <ScalarProperty Name="fromdate" ColumnName="fromdate" />
+          <ScalarProperty Name="todate" ColumnName="todate" />
+          <ScalarProperty Name="billamount" ColumnName="billamount" />
+          <ScalarProperty Name="meterreading" ColumnName="meterreading" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,659 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="projecttModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'projectt.dbo.tbl_Login' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tbl_Login">
+          <Property Name="UserID" Type="int" />
+          <Property Name="LoginName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+  <EntityType Name="tbl_UserMaster">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserFirstName" Type="varchar" MaxLength="50" />
+    <Property Name="UserMiddleName" Type="varchar" MaxLength="50" />
+    <Property Name="UserLastName" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar" MaxLength="100" />
+    <Property Name="EmailId" Type="varchar" MaxLength="50" />
+    <Property Name="HouseNo" Type="varchar" MaxLength="50" />
+    <Property Name="PhoneNo" Type="varchar" MaxLength="50" />
+    <Property Name="DOB" Type="datetime" />
+    <Property Name="DOR" Type="datetime" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="Role" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tl_AreaMaster">
+    <Key>
+      <PropertyRef Name="AreaId" />
+    </Key>
+    <Property Name="AreaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AreaName" Type="varchar" MaxLength="50" />
+    <Property Name="AreaSpan" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="AreaTypeId" Type="int" />
+    <Property Name="AreaIdentifiedDate" Type="datetime" />
+    <Property Name="C_M_P_Id" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'projectt.dbo.tl_AreaStreetDetails' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tl_AreaStreetDetails">
+          <Property Name="AreaId" Type="int" />
+          <Property Name="StreetId" Type="int" />
+        </EntityType>-->
+  <EntityType Name="tl_AreaTypeMaster">
+    <Key>
+      <PropertyRef Name="AreaTypeId" />
+    </Key>
+    <Property Name="AreaTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AreaTypeName" Type="varchar" MaxLength="50" />
+    <Property Name="AreaTypeAbbr" Type="varchar" MaxLength="50" />
+    <Property Name="AreaTypeDesc" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'projectt.dbo.tl_BuildingApprovalCategoryusageMaster' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tl_BuildingApprovalCategoryusageMaster">
+          <Property Name="BuildingApprovalNo" Type="int" />
+          <Property Name="CategoryusagemasterId" Type="int" />
+          <Property Name="floorid" Type="int" />
+        </EntityType>-->
+  <EntityType Name="tl_BuildingApprovalMaster">
+    <Key>
+      <PropertyRef Name="BuildingApprNo" />
+    </Key>
+    <Property Name="BuildingApprNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BuildingApprDate" Type="datetime" />
+    <Property Name="BuildingDescription" Type="varchar" MaxLength="50" />
+    <Property Name="Housetypeid" Type="int" />
+    <Property Name="PlotId" Type="int" />
+    <Property Name="AreaId" Type="int" />
+    <Property Name="StreetId" Type="int" />
+    <Property Name="NoOfFloorAppr" Type="int" />
+    <Property Name="Plintharea" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="tl_Buildingfloormaster">
+    <Key>
+      <PropertyRef Name="BuildingApprno" />
+      <PropertyRef Name="floorNoUnique" />
+    </Key>
+    <Property Name="BuildingApprno" Type="int" Nullable="false" />
+    <Property Name="floorNoUnique" Type="int" Nullable="false" />
+    <Property Name="floorPlintharea" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="tl_BuildingpropertyTaxMaster">
+    <Key>
+      <PropertyRef Name="Propertytaxid" />
+    </Key>
+    <Property Name="Propertytaxid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PropertyTaxpaiddate" Type="datetime" />
+    <Property Name="propertytaxAmount" Type="money" />
+    <Property Name="BuildingNo" Type="int" />
+    <Property Name="UniqueHouseNo" Type="int" />
+    <Property Name="Educationtaxamt" Type="money" />
+    <Property Name="LibrarycessAmt" Type="money" />
+    <Property Name="Uacpenalty" Type="money" />
+  </EntityType>
+  <EntityType Name="tl_Categoryusagemaster">
+    <Key>
+      <PropertyRef Name="CategoryusageMasterId" />
+    </Key>
+    <Property Name="CategoryusageMasterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryusageName" Type="varchar" MaxLength="50" />
+    <Property Name="CategoryusageDesc" Type="varchar" MaxLength="50" />
+    <Property Name="CategoryusageAbbr" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tl_ElectricalConnectionCategoryMaster">
+    <Key>
+      <PropertyRef Name="ConnectionCategoryId" />
+    </Key>
+    <Property Name="ConnectionCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ConnectionCategoryName" Type="varchar" MaxLength="50" />
+    <Property Name="ConnectionCategoryAbbr" Type="varchar" MaxLength="50" />
+    <Property Name="ConnectionCategoryMinCharge" Type="money" />
+    <Property Name="ConnectionCategoryMaxCharge" Type="money" />
+    <Property Name="ConnectionCategoryDescription" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tl_ElectricalEquipmentMaster">
+    <Key>
+      <PropertyRef Name="ElectricalEquipmentId" />
+    </Key>
+    <Property Name="ElectricalEquipmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ElectricalEquipmentName" Type="varchar" MaxLength="50" />
+    <Property Name="ElectricalEquipmentAbbr" Type="varchar" MaxLength="50" />
+    <Property Name="ElectricalEquipmentDesc" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tl_electricalmeterreadingmaster">
+    <Key>
+      <PropertyRef Name="meterreadingid" />
+    </Key>
+    <Property Name="meterreadingid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uniquehouseno" Type="int" />
+    <Property Name="electricalserviceno" Type="int" />
+    <Property Name="previousreading" Type="int" />
+    <Property Name="presentreading" Type="int" />
+    <Property Name="unitsconsumed" Type="int" />
+    <Property Name="emergencycharges" Type="money" />
+    <Property Name="CurrentCharges" Type="money" />
+    <Property Name="ed" Type="int" />
+    <Property Name="AddCharges" Type="money" />
+    <Property Name="fsacharges" Type="money" />
+    <Property Name="acdcharges" Type="money" />
+    <Property Name="billAmount" Type="money" />
+    <Property Name="adyamount" Type="money" />
+    <Property Name="netamount" Type="money" />
+    <Property Name="Areeas" Type="varchar" MaxLength="50" />
+    <Property Name="dateelectivitybill" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'projectt.dbo.tl_ElectricalServiceEquipments' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tl_ElectricalServiceEquipments">
+          <Property Name="ElectricalserviceNo" Type="int" />
+          <Property Name="ElectricalEquipmentid" Type="int" />
+          <Property Name="EquipmentVolltage" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ConsumptionUnitsAverage" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>-->
+  <EntityType Name="tl_ElectricityServiceMaster">
+    <Key>
+      <PropertyRef Name="ElectricalServiceNo" />
+    </Key>
+    <Property Name="ElectricalServiceNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UniqueHouseno" Type="int" Nullable="false" />
+    <Property Name="ActulaHouseNo" Type="varchar" MaxLength="50" />
+    <Property Name="ConncetionCategoryId" Type="int" />
+    <Property Name="Ero" Type="varchar" MaxLength="50" />
+    <Property Name="Section" Type="varchar" MaxLength="50" />
+    <Property Name="Group" Type="varchar" MaxLength="50" />
+    <Property Name="NoOffloors" Type="int" />
+    <Property Name="NoofPhases" Type="int" />
+    <Property Name="mp" Type="varchar" MaxLength="50" />
+    <Property Name="load" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tl_FloorMaster">
+    <Key>
+      <PropertyRef Name="FloorId" />
+    </Key>
+    <Property Name="FloorId" Type="int" Nullable="false" />
+    <Property Name="FloorName" Type="varchar" MaxLength="50" />
+    <Property Name="FloorDescription" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tl_HousesMaster">
+    <Key>
+      <PropertyRef Name="UniQueHousNo" />
+    </Key>
+    <Property Name="UniQueHousNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OwnerName" Type="varchar" MaxLength="50" />
+    <Property Name="TelephonNo" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="ActualHouseNo" Type="varchar" MaxLength="50" />
+    <Property Name="HouseRegistrationdate" Type="datetime" />
+    <Property Name="AreaId" Type="int" />
+    <Property Name="StreetId" Type="int" />
+    <Property Name="PlotId" Type="int" />
+    <Property Name="ElectricityConnstatus" Type="bit" />
+    <Property Name="GasConnStatus" Type="bit" />
+    <Property Name="WaterConnStatus" Type="varchar" MaxLength="50" />
+    <Property Name="C_M_P_Id" Type="int" />
+    <Property Name="BuildingApprovalNo" Type="int" />
+  </EntityType>
+  <EntityType Name="tl_HouseTypeMaster">
+    <Key>
+      <PropertyRef Name="HouseTypeId" />
+    </Key>
+    <Property Name="HouseTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HouseTypeName" Type="varchar" MaxLength="50" />
+    <Property Name="HouseTypeAbbr" Type="varchar" MaxLength="50" />
+    <Property Name="HouseTypeDescription" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tl_LocalityMaster">
+    <Key>
+      <PropertyRef Name="LocalityId" />
+    </Key>
+    <Property Name="LocalityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocalityName" Type="varchar" MaxLength="50" />
+    <Property Name="LocalityDesc" Type="varchar" MaxLength="50" />
+    <Property Name="LocalitySpan" Type="int" />
+    <Property Name="LocalityAbbr" Type="varchar" MaxLength="50" />
+    <Property Name="AreaId" Type="int" />
+    <Property Name="LocalityIdentityDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tl_MunicipalityTaxMaster">
+    <Key>
+      <PropertyRef Name="UniqueMunicipalityTaxNo" />
+    </Key>
+    <Property Name="UniqueMunicipalityTaxNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MunicipalityorpanchayatorcorporatioNo" Type="int" />
+    <Property Name="UniqueHouseNo" Type="int" />
+    <Property Name="TaxAssenmentNo" Type="int" />
+    <Property Name="LocalityId" Type="int" />
+    <Property Name="RevenueCircleId" Type="int" />
+    <Property Name="RevenueBlockId" Type="int" />
+    <Property Name="BuildingApprovalNo" Type="int" />
+    <Property Name="NoOfFlower" Type="int" />
+    <Property Name="PropetyTaxvalue" Type="money" />
+    <Property Name="EducationTaxValue" Type="money" />
+    <Property Name="LibraryCess" Type="money" />
+    <Property Name="UacPenalty" Type="int" />
+    <Property Name="Date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tl_MunicipalityTaxMasterDetails">
+    <Key>
+      <PropertyRef Name="MunicipaliltyTaxPaymentId" />
+    </Key>
+    <Property Name="MunicipaliltyTaxPaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MunicipalityTaxpayDate" Type="datetime" />
+    <Property Name="UniqueMunicipalityNo" Type="int" />
+    <Property Name="Paymenttype" Type="varchar" MaxLength="50" />
+    <Property Name="paymentcibfirmedstatus" Type="bit" />
+    <Property Name="paymentAmount" Type="money" />
+    <Property Name="AnyRemarks" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tl_PLotMaster">
+    <Key>
+      <PropertyRef Name="PlotId" />
+    </Key>
+    <Property Name="PlotId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlotOwnerName" Type="varchar" MaxLength="50" />
+    <Property Name="TelephoneNO" Type="varchar" MaxLength="50" />
+    <Property Name="PlotDescription" Type="varchar" MaxLength="50" />
+    <Property Name="AreaId" Type="int" />
+    <Property Name="StreetId" Type="int" />
+    <Property Name="PlotRegistrationDate" Type="datetime" />
+    <Property Name="C_M_P_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="tl_RevenueBlockMaster">
+    <Key>
+      <PropertyRef Name="RevenueBlockId" />
+    </Key>
+    <Property Name="RevenueBlockId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RevenueBlockName" Type="varchar" MaxLength="50" />
+    <Property Name="RevenueBlockSpan" Type="varchar" MaxLength="50" />
+    <Property Name="RevenueDesc" Type="varchar" MaxLength="100" />
+    <Property Name="RevenueBlockAbbr" Type="varchar" MaxLength="50" />
+    <Property Name="RevenueBlockIdentifiedDate" Type="datetime" />
+    <Property Name="RevenueCircleId" Type="int" />
+  </EntityType>
+  <EntityType Name="tl_revenueCircleMaster">
+    <Key>
+      <PropertyRef Name="RevenueCircleid" />
+    </Key>
+    <Property Name="RevenueCircleid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RevenueCircleName" Type="varchar" MaxLength="50" />
+    <Property Name="RevenueCircleDesc" Type="varchar" MaxLength="50" />
+    <Property Name="RevenueCircleSpan" Type="varchar" MaxLength="50" />
+    <Property Name="RevenueCircleIdentifiedDate" Type="datetime" />
+    <Property Name="RevenueAbbr" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tl_StreetMaster">
+    <Key>
+      <PropertyRef Name="StreetId" />
+    </Key>
+    <Property Name="StreetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StreetName" Type="varchar" MaxLength="50" />
+    <Property Name="StreetSpan" Type="int" />
+    <Property Name="StreetTypeId" Type="int" />
+    <Property Name="StreetIdentiDate" Type="datetime" />
+    <Property Name="C_M_P_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="tl_StreetTypeMaster">
+    <Key>
+      <PropertyRef Name="StreetTypeId" />
+    </Key>
+    <Property Name="StreetTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StreetTypeName" Type="varchar" MaxLength="50" />
+    <Property Name="StreetTypeAbbr" Type="varchar" MaxLength="50" />
+    <Property Name="StreetTypeDescription" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_tl_AreaMaster_tl_AreaTypeMaster">
+    <End Role="tl_AreaTypeMaster" Type="Self.tl_AreaTypeMaster" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tl_AreaMaster" Type="Self.tl_AreaMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_AreaTypeMaster">
+        <PropertyRef Name="AreaTypeId" />
+      </Principal>
+      <Dependent Role="tl_AreaMaster">
+        <PropertyRef Name="AreaTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+error 6004: The table 'projectt.dbo.tl_AreaStreetDetails' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_tl_AreaStreetDetails_tl_AreaMaster" />-->
+  <!--Errors Found During Generation:
+error 6004: The table 'projectt.dbo.tl_AreaStreetDetails' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_tl_AreaStreetDetails_tl_StreetMaster" />-->
+  <!--Errors Found During Generation:
+error 6004: The table 'projectt.dbo.tl_BuildingApprovalCategoryusageMaster' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_tl_BuildingApprovalCategoryusageMaster_tl_BuildingApprovalMaster" />-->
+  <!--Errors Found During Generation:
+error 6004: The table 'projectt.dbo.tl_BuildingApprovalCategoryusageMaster' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_tl_BuildingApprovalCategoryusageMaster_tl_Categoryusagemaster" />-->
+  <!--Errors Found During Generation:
+error 6004: The table 'projectt.dbo.tl_BuildingApprovalCategoryusageMaster' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_tl_BuildingApprovalCategoryusageMaster_tl_FloorMaster" />-->
+  <Association Name="FK_tl_BuildingApprovalMaster_tl_AreaMaster">
+    <End Role="tl_AreaMaster" Type="Self.tl_AreaMaster" Multiplicity="0..1" />
+    <End Role="tl_BuildingApprovalMaster" Type="Self.tl_BuildingApprovalMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_AreaMaster">
+        <PropertyRef Name="AreaId" />
+      </Principal>
+      <Dependent Role="tl_BuildingApprovalMaster">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_BuildingApprovalMaster_tl_StreetMaster">
+    <End Role="tl_StreetMaster" Type="Self.tl_StreetMaster" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tl_BuildingApprovalMaster" Type="Self.tl_BuildingApprovalMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_StreetMaster">
+        <PropertyRef Name="StreetId" />
+      </Principal>
+      <Dependent Role="tl_BuildingApprovalMaster">
+        <PropertyRef Name="StreetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_Buildingfloormaster_tl_BuildingApprovalMaster">
+    <End Role="tl_BuildingApprovalMaster" Type="Self.tl_BuildingApprovalMaster" Multiplicity="1" />
+    <End Role="tl_Buildingfloormaster" Type="Self.tl_Buildingfloormaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_BuildingApprovalMaster">
+        <PropertyRef Name="BuildingApprNo" />
+      </Principal>
+      <Dependent Role="tl_Buildingfloormaster">
+        <PropertyRef Name="BuildingApprno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_BuildingpropertyTaxMaster_tl_BuildingApprovalMaster">
+    <End Role="tl_BuildingApprovalMaster" Type="Self.tl_BuildingApprovalMaster" Multiplicity="0..1" />
+    <End Role="tl_BuildingpropertyTaxMaster" Type="Self.tl_BuildingpropertyTaxMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_BuildingApprovalMaster">
+        <PropertyRef Name="BuildingApprNo" />
+      </Principal>
+      <Dependent Role="tl_BuildingpropertyTaxMaster">
+        <PropertyRef Name="BuildingNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_BuildingpropertyTaxMaster_tl_HousesMaster">
+    <End Role="tl_HousesMaster" Type="Self.tl_HousesMaster" Multiplicity="0..1" />
+    <End Role="tl_BuildingpropertyTaxMaster" Type="Self.tl_BuildingpropertyTaxMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_HousesMaster">
+        <PropertyRef Name="UniQueHousNo" />
+      </Principal>
+      <Dependent Role="tl_BuildingpropertyTaxMaster">
+        <PropertyRef Name="UniqueHouseNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_ElectricityServiceMaster_tl_ElectricalConnectionCategoryMaster">
+    <End Role="tl_ElectricalConnectionCategoryMaster" Type="Self.tl_ElectricalConnectionCategoryMaster" Multiplicity="0..1" />
+    <End Role="tl_ElectricityServiceMaster" Type="Self.tl_ElectricityServiceMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_ElectricalConnectionCategoryMaster">
+        <PropertyRef Name="ConnectionCategoryId" />
+      </Principal>
+      <Dependent Role="tl_ElectricityServiceMaster">
+        <PropertyRef Name="ConncetionCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_ElectricityServiceMaster_tl_HousesMaster">
+    <End Role="tl_HousesMaster" Type="Self.tl_HousesMaster" Multiplicity="1" />
+    <End Role="tl_ElectricityServiceMaster" Type="Self.tl_ElectricityServiceMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_HousesMaster">
+        <PropertyRef Name="UniQueHousNo" />
+      </Principal>
+      <Dependent Role="tl_ElectricityServiceMaster">
+        <PropertyRef Name="UniqueHouseno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_HousesMaster_tl_AreaMaster">
+    <End Role="tl_AreaMaster" Type="Self.tl_AreaMaster" Multiplicity="0..1" />
+    <End Role="tl_HousesMaster" Type="Self.tl_HousesMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_AreaMaster">
+        <PropertyRef Name="AreaId" />
+      </Principal>
+      <Dependent Role="tl_HousesMaster">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_HousesMaster_tl_StreetMaster">
+    <End Role="tl_StreetMaster" Type="Self.tl_StreetMaster" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tl_HousesMaster" Type="Self.tl_HousesMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_StreetMaster">
+        <PropertyRef Name="StreetId" />
+      </Principal>
+      <Dependent Role="tl_HousesMaster">
+        <PropertyRef Name="StreetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_LocalityMaster_tl_AreaMaster">
+    <End Role="tl_AreaMaster" Type="Self.tl_AreaMaster" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tl_LocalityMaster" Type="Self.tl_LocalityMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_AreaMaster">
+        <PropertyRef Name="AreaId" />
+      </Principal>
+      <Dependent Role="tl_LocalityMaster">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_MunicipalityTaxMaster_tl_MunicipalityTaxMaster">
+    <End Role="tl_revenueCircleMaster" Type="Self.tl_revenueCircleMaster" Multiplicity="0..1" />
+    <End Role="tl_MunicipalityTaxMaster" Type="Self.tl_MunicipalityTaxMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_revenueCircleMaster">
+        <PropertyRef Name="RevenueCircleid" />
+      </Principal>
+      <Dependent Role="tl_MunicipalityTaxMaster">
+        <PropertyRef Name="RevenueCircleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_MunicipalityTaxMaster_tl_RevenueBlockMaster">
+    <End Role="tl_RevenueBlockMaster" Type="Self.tl_RevenueBlockMaster" Multiplicity="0..1" />
+    <End Role="tl_MunicipalityTaxMaster" Type="Self.tl_MunicipalityTaxMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_RevenueBlockMaster">
+        <PropertyRef Name="RevenueBlockId" />
+      </Principal>
+      <Dependent Role="tl_MunicipalityTaxMaster">
+        <PropertyRef Name="RevenueBlockId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_MunicipalityTaxMasterDetails_tl_MunicipalityTaxMaster">
+    <End Role="tl_MunicipalityTaxMaster" Type="Self.tl_MunicipalityTaxMaster" Multiplicity="0..1" />
+    <End Role="tl_MunicipalityTaxMasterDetails" Type="Self.tl_MunicipalityTaxMasterDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_MunicipalityTaxMaster">
+        <PropertyRef Name="UniqueMunicipalityTaxNo" />
+      </Principal>
+      <Dependent Role="tl_MunicipalityTaxMasterDetails">
+        <PropertyRef Name="UniqueMunicipalityNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_PLotMaster_tl_AreaMaster">
+    <End Role="tl_AreaMaster" Type="Self.tl_AreaMaster" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tl_PLotMaster" Type="Self.tl_PLotMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_AreaMaster">
+        <PropertyRef Name="AreaId" />
+      </Principal>
+      <Dependent Role="tl_PLotMaster">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_PLotMaster_tl_StreetMaster1">
+    <End Role="tl_StreetMaster" Type="Self.tl_StreetMaster" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tl_PLotMaster" Type="Self.tl_PLotMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_StreetMaster">
+        <PropertyRef Name="StreetId" />
+      </Principal>
+      <Dependent Role="tl_PLotMaster">
+        <PropertyRef Name="StreetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_RevenueBlockMaster_tl_revenueCircleMaster">
+    <End Role="tl_revenueCircleMaster" Type="Self.tl_revenueCircleMaster" Multiplicity="0..1" />
+    <End Role="tl_RevenueBlockMaster" Type="Self.tl_RevenueBlockMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_revenueCircleMaster">
+        <PropertyRef Name="RevenueCircleid" />
+      </Principal>
+      <Dependent Role="tl_RevenueBlockMaster">
+        <PropertyRef Name="RevenueCircleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_StreetMaster_tl_StreetTypeMaster">
+    <End Role="tl_StreetTypeMaster" Type="Self.tl_StreetTypeMaster" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tl_StreetMaster" Type="Self.tl_StreetMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_StreetTypeMaster">
+        <PropertyRef Name="StreetTypeId" />
+      </Principal>
+      <Dependent Role="tl_StreetMaster">
+        <PropertyRef Name="StreetTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="projecttModel1StoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_UserMaster" EntityType="Self.tbl_UserMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_AreaMaster" EntityType="Self.tl_AreaMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_AreaTypeMaster" EntityType="Self.tl_AreaTypeMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_BuildingApprovalMaster" EntityType="Self.tl_BuildingApprovalMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_Buildingfloormaster" EntityType="Self.tl_Buildingfloormaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_BuildingpropertyTaxMaster" EntityType="Self.tl_BuildingpropertyTaxMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_Categoryusagemaster" EntityType="Self.tl_Categoryusagemaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_ElectricalConnectionCategoryMaster" EntityType="Self.tl_ElectricalConnectionCategoryMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_ElectricalEquipmentMaster" EntityType="Self.tl_ElectricalEquipmentMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_electricalmeterreadingmaster" EntityType="Self.tl_electricalmeterreadingmaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_ElectricityServiceMaster" EntityType="Self.tl_ElectricityServiceMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_FloorMaster" EntityType="Self.tl_FloorMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_HousesMaster" EntityType="Self.tl_HousesMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_HouseTypeMaster" EntityType="Self.tl_HouseTypeMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_LocalityMaster" EntityType="Self.tl_LocalityMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_MunicipalityTaxMaster" EntityType="Self.tl_MunicipalityTaxMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_MunicipalityTaxMasterDetails" EntityType="Self.tl_MunicipalityTaxMasterDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_PLotMaster" EntityType="Self.tl_PLotMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_RevenueBlockMaster" EntityType="Self.tl_RevenueBlockMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_revenueCircleMaster" EntityType="Self.tl_revenueCircleMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_StreetMaster" EntityType="Self.tl_StreetMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tl_StreetTypeMaster" EntityType="Self.tl_StreetTypeMaster" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tl_AreaMaster_tl_AreaTypeMaster" Association="Self.FK_tl_AreaMaster_tl_AreaTypeMaster">
+      <End Role="tl_AreaTypeMaster" EntitySet="tl_AreaTypeMaster" />
+      <End Role="tl_AreaMaster" EntitySet="tl_AreaMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_BuildingApprovalMaster_tl_AreaMaster" Association="Self.FK_tl_BuildingApprovalMaster_tl_AreaMaster">
+      <End Role="tl_AreaMaster" EntitySet="tl_AreaMaster" />
+      <End Role="tl_BuildingApprovalMaster" EntitySet="tl_BuildingApprovalMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_BuildingApprovalMaster_tl_StreetMaster" Association="Self.FK_tl_BuildingApprovalMaster_tl_StreetMaster">
+      <End Role="tl_StreetMaster" EntitySet="tl_StreetMaster" />
+      <End Role="tl_BuildingApprovalMaster" EntitySet="tl_BuildingApprovalMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_Buildingfloormaster_tl_BuildingApprovalMaster" Association="Self.FK_tl_Buildingfloormaster_tl_BuildingApprovalMaster">
+      <End Role="tl_BuildingApprovalMaster" EntitySet="tl_BuildingApprovalMaster" />
+      <End Role="tl_Buildingfloormaster" EntitySet="tl_Buildingfloormaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_BuildingpropertyTaxMaster_tl_BuildingApprovalMaster" Association="Self.FK_tl_BuildingpropertyTaxMaster_tl_BuildingApprovalMaster">
+      <End Role="tl_BuildingApprovalMaster" EntitySet="tl_BuildingApprovalMaster" />
+      <End Role="tl_BuildingpropertyTaxMaster" EntitySet="tl_BuildingpropertyTaxMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_BuildingpropertyTaxMaster_tl_HousesMaster" Association="Self.FK_tl_BuildingpropertyTaxMaster_tl_HousesMaster">
+      <End Role="tl_HousesMaster" EntitySet="tl_HousesMaster" />
+      <End Role="tl_BuildingpropertyTaxMaster" EntitySet="tl_BuildingpropertyTaxMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_ElectricityServiceMaster_tl_ElectricalConnectionCategoryMaster" Association="Self.FK_tl_ElectricityServiceMaster_tl_ElectricalConnectionCategoryMaster">
+      <End Role="tl_ElectricalConnectionCategoryMaster" EntitySet="tl_ElectricalConnectionCategoryMaster" />
+      <End Role="tl_ElectricityServiceMaster" EntitySet="tl_ElectricityServiceMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_ElectricityServiceMaster_tl_HousesMaster" Association="Self.FK_tl_ElectricityServiceMaster_tl_HousesMaster">
+      <End Role="tl_HousesMaster" EntitySet="tl_HousesMaster" />
+      <End Role="tl_ElectricityServiceMaster" EntitySet="tl_ElectricityServiceMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_HousesMaster_tl_AreaMaster" Association="Self.FK_tl_HousesMaster_tl_AreaMaster">
+      <End Role="tl_AreaMaster" EntitySet="tl_AreaMaster" />
+      <End Role="tl_HousesMaster" EntitySet="tl_HousesMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_HousesMaster_tl_StreetMaster" Association="Self.FK_tl_HousesMaster_tl_StreetMaster">
+      <End Role="tl_StreetMaster" EntitySet="tl_StreetMaster" />
+      <End Role="tl_HousesMaster" EntitySet="tl_HousesMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_LocalityMaster_tl_AreaMaster" Association="Self.FK_tl_LocalityMaster_tl_AreaMaster">
+      <End Role="tl_AreaMaster" EntitySet="tl_AreaMaster" />
+      <End Role="tl_LocalityMaster" EntitySet="tl_LocalityMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_MunicipalityTaxMaster_tl_MunicipalityTaxMaster" Association="Self.FK_tl_MunicipalityTaxMaster_tl_MunicipalityTaxMaster">
+      <End Role="tl_revenueCircleMaster" EntitySet="tl_revenueCircleMaster" />
+      <End Role="tl_MunicipalityTaxMaster" EntitySet="tl_MunicipalityTaxMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_MunicipalityTaxMaster_tl_RevenueBlockMaster" Association="Self.FK_tl_MunicipalityTaxMaster_tl_RevenueBlockMaster">
+      <End Role="tl_RevenueBlockMaster" EntitySet="tl_RevenueBlockMaster" />
+      <End Role="tl_MunicipalityTaxMaster" EntitySet="tl_MunicipalityTaxMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_MunicipalityTaxMasterDetails_tl_MunicipalityTaxMaster" Association="Self.FK_tl_MunicipalityTaxMasterDetails_tl_MunicipalityTaxMaster">
+      <End Role="tl_MunicipalityTaxMaster" EntitySet="tl_MunicipalityTaxMaster" />
+      <End Role="tl_MunicipalityTaxMasterDetails" EntitySet="tl_MunicipalityTaxMasterDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_PLotMaster_tl_AreaMaster" Association="Self.FK_tl_PLotMaster_tl_AreaMaster">
+      <End Role="tl_AreaMaster" EntitySet="tl_AreaMaster" />
+      <End Role="tl_PLotMaster" EntitySet="tl_PLotMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_PLotMaster_tl_StreetMaster1" Association="Self.FK_tl_PLotMaster_tl_StreetMaster1">
+      <End Role="tl_StreetMaster" EntitySet="tl_StreetMaster" />
+      <End Role="tl_PLotMaster" EntitySet="tl_PLotMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_RevenueBlockMaster_tl_revenueCircleMaster" Association="Self.FK_tl_RevenueBlockMaster_tl_revenueCircleMaster">
+      <End Role="tl_revenueCircleMaster" EntitySet="tl_revenueCircleMaster" />
+      <End Role="tl_RevenueBlockMaster" EntitySet="tl_RevenueBlockMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_StreetMaster_tl_StreetTypeMaster" Association="Self.FK_tl_StreetMaster_tl_StreetTypeMaster">
+      <End Role="tl_StreetTypeMaster" EntitySet="tl_StreetTypeMaster" />
+      <End Role="tl_StreetMaster" EntitySet="tl_StreetMaster" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

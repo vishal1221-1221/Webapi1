@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="projecttModel2StoreContainer" CdmEntityContainer="projecttEntities2">
+    <EntitySetMapping Name="tl_HousesMaster">
+      <EntityTypeMapping TypeName="projecttModel2.tl_HousesMaster">
+        <MappingFragment StoreEntitySet="tl_HousesMaster">
+          <ScalarProperty Name="UniQueHousNo" ColumnName="UniQueHousNo" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="TelephonNo" ColumnName="TelephonNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ActualHouseNo" ColumnName="ActualHouseNo" />
+          <ScalarProperty Name="HouseRegistrationdate" ColumnName="HouseRegistrationdate" />
+          <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+          <ScalarProperty Name="StreetId" ColumnName="StreetId" />
+          <ScalarProperty Name="PlotId" ColumnName="PlotId" />
+          <ScalarProperty Name="BuildingApprovalNo" ColumnName="BuildingApprovalNo" />
+          <ScalarProperty Name="C_M_P_Id" ColumnName="C_M_P_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

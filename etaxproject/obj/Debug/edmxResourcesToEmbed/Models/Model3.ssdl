@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="projecttModel2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tl_HousesMaster">
+    <Key>
+      <PropertyRef Name="UniQueHousNo" />
+    </Key>
+    <Property Name="UniQueHousNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OwnerName" Type="varchar" MaxLength="50" />
+    <Property Name="TelephonNo" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="ActualHouseNo" Type="varchar" MaxLength="50" />
+    <Property Name="HouseRegistrationdate" Type="datetime" />
+    <Property Name="AreaId" Type="int" />
+    <Property Name="StreetId" Type="int" />
+    <Property Name="PlotId" Type="int" />
+    <Property Name="BuildingApprovalNo" Type="int" />
+    <Property Name="C_M_P_Id" Type="int" />
+  </EntityType>
+  <EntityContainer Name="projecttModel2StoreContainer">
+    <EntitySet Name="tl_HousesMaster" EntityType="Self.tl_HousesMaster" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

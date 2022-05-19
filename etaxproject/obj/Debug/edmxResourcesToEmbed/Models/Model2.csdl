@@ -1,0 +1,652 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="projecttModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbl_UserMaster">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserMiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HouseNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DOB" Type="DateTime" Precision="3" />
+    <Property Name="DOR" Type="DateTime" Precision="3" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tl_AreaMaster">
+    <Key>
+      <PropertyRef Name="AreaId" />
+    </Key>
+    <Property Name="AreaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AreaSpan" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="AreaTypeId" Type="Int32" />
+    <Property Name="AreaIdentifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="C_M_P_Id" Type="Int32" />
+    <NavigationProperty Name="tl_AreaTypeMaster" Relationship="Self.FK_tl_AreaMaster_tl_AreaTypeMaster" FromRole="tl_AreaMaster" ToRole="tl_AreaTypeMaster" />
+    <NavigationProperty Name="tl_BuildingApprovalMaster" Relationship="Self.FK_tl_BuildingApprovalMaster_tl_AreaMaster" FromRole="tl_AreaMaster" ToRole="tl_BuildingApprovalMaster" />
+    <NavigationProperty Name="tl_HousesMaster" Relationship="Self.FK_tl_HousesMaster_tl_AreaMaster" FromRole="tl_AreaMaster" ToRole="tl_HousesMaster" />
+    <NavigationProperty Name="tl_LocalityMaster" Relationship="Self.FK_tl_LocalityMaster_tl_AreaMaster" FromRole="tl_AreaMaster" ToRole="tl_LocalityMaster" />
+    <NavigationProperty Name="tl_PLotMaster" Relationship="Self.FK_tl_PLotMaster_tl_AreaMaster" FromRole="tl_AreaMaster" ToRole="tl_PLotMaster" />
+  </EntityType>
+  <EntityType Name="tl_AreaTypeMaster">
+    <Key>
+      <PropertyRef Name="AreaTypeId" />
+    </Key>
+    <Property Name="AreaTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AreaTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AreaTypeAbbr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AreaTypeDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tl_AreaMaster" Relationship="Self.FK_tl_AreaMaster_tl_AreaTypeMaster" FromRole="tl_AreaTypeMaster" ToRole="tl_AreaMaster" />
+  </EntityType>
+  <EntityType Name="tl_BuildingApprovalMaster">
+    <Key>
+      <PropertyRef Name="BuildingApprNo" />
+    </Key>
+    <Property Name="BuildingApprNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BuildingApprDate" Type="DateTime" Precision="3" />
+    <Property Name="BuildingDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Housetypeid" Type="Int32" />
+    <Property Name="PlotId" Type="Int32" />
+    <Property Name="AreaId" Type="Int32" />
+    <Property Name="StreetId" Type="Int32" />
+    <Property Name="NoOfFloorAppr" Type="Int32" />
+    <Property Name="Plintharea" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="tl_AreaMaster" Relationship="Self.FK_tl_BuildingApprovalMaster_tl_AreaMaster" FromRole="tl_BuildingApprovalMaster" ToRole="tl_AreaMaster" />
+    <NavigationProperty Name="tl_StreetMaster" Relationship="Self.FK_tl_BuildingApprovalMaster_tl_StreetMaster" FromRole="tl_BuildingApprovalMaster" ToRole="tl_StreetMaster" />
+    <NavigationProperty Name="tl_Buildingfloormaster" Relationship="Self.FK_tl_Buildingfloormaster_tl_BuildingApprovalMaster" FromRole="tl_BuildingApprovalMaster" ToRole="tl_Buildingfloormaster" />
+    <NavigationProperty Name="tl_BuildingpropertyTaxMaster" Relationship="Self.FK_tl_BuildingpropertyTaxMaster_tl_BuildingApprovalMaster" FromRole="tl_BuildingApprovalMaster" ToRole="tl_BuildingpropertyTaxMaster" />
+  </EntityType>
+  <EntityType Name="tl_Buildingfloormaster">
+    <Key>
+      <PropertyRef Name="BuildingApprno" />
+      <PropertyRef Name="floorNoUnique" />
+    </Key>
+    <Property Name="BuildingApprno" Type="Int32" Nullable="false" />
+    <Property Name="floorNoUnique" Type="Int32" Nullable="false" />
+    <Property Name="floorPlintharea" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="tl_BuildingApprovalMaster" Relationship="Self.FK_tl_Buildingfloormaster_tl_BuildingApprovalMaster" FromRole="tl_Buildingfloormaster" ToRole="tl_BuildingApprovalMaster" />
+  </EntityType>
+  <EntityType Name="tl_BuildingpropertyTaxMaster">
+    <Key>
+      <PropertyRef Name="Propertytaxid" />
+    </Key>
+    <Property Name="Propertytaxid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PropertyTaxpaiddate" Type="DateTime" Precision="3" />
+    <Property Name="propertytaxAmount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="BuildingNo" Type="Int32" />
+    <Property Name="UniqueHouseNo" Type="Int32" />
+    <Property Name="Educationtaxamt" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="LibrarycessAmt" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Uacpenalty" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="tl_BuildingApprovalMaster" Relationship="Self.FK_tl_BuildingpropertyTaxMaster_tl_BuildingApprovalMaster" FromRole="tl_BuildingpropertyTaxMaster" ToRole="tl_BuildingApprovalMaster" />
+    <NavigationProperty Name="tl_HousesMaster" Relationship="Self.FK_tl_BuildingpropertyTaxMaster_tl_HousesMaster" FromRole="tl_BuildingpropertyTaxMaster" ToRole="tl_HousesMaster" />
+  </EntityType>
+  <EntityType Name="tl_Categoryusagemaster">
+    <Key>
+      <PropertyRef Name="CategoryusageMasterId" />
+    </Key>
+    <Property Name="CategoryusageMasterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryusageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryusageDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryusageAbbr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tl_ElectricalConnectionCategoryMaster">
+    <Key>
+      <PropertyRef Name="ConnectionCategoryId" />
+    </Key>
+    <Property Name="ConnectionCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ConnectionCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ConnectionCategoryAbbr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ConnectionCategoryMinCharge" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ConnectionCategoryMaxCharge" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ConnectionCategoryDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tl_ElectricityServiceMaster" Relationship="Self.FK_tl_ElectricityServiceMaster_tl_ElectricalConnectionCategoryMaster" FromRole="tl_ElectricalConnectionCategoryMaster" ToRole="tl_ElectricityServiceMaster" />
+  </EntityType>
+  <EntityType Name="tl_ElectricalEquipmentMaster">
+    <Key>
+      <PropertyRef Name="ElectricalEquipmentId" />
+    </Key>
+    <Property Name="ElectricalEquipmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ElectricalEquipmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ElectricalEquipmentAbbr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ElectricalEquipmentDesc" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tl_electricalmeterreadingmaster">
+    <Key>
+      <PropertyRef Name="meterreadingid" />
+    </Key>
+    <Property Name="meterreadingid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uniquehouseno" Type="Int32" />
+    <Property Name="electricalserviceno" Type="Int32" />
+    <Property Name="previousreading" Type="Int32" />
+    <Property Name="presentreading" Type="Int32" />
+    <Property Name="unitsconsumed" Type="Int32" />
+    <Property Name="emergencycharges" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="CurrentCharges" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ed" Type="Int32" />
+    <Property Name="AddCharges" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="fsacharges" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="acdcharges" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="billAmount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="adyamount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="netamount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Areeas" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dateelectivitybill" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tl_ElectricityServiceMaster">
+    <Key>
+      <PropertyRef Name="ElectricalServiceNo" />
+    </Key>
+    <Property Name="ElectricalServiceNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UniqueHouseno" Type="Int32" Nullable="false" />
+    <Property Name="ActulaHouseNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ConncetionCategoryId" Type="Int32" />
+    <Property Name="Ero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Section" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Group" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NoOffloors" Type="Int32" />
+    <Property Name="NoofPhases" Type="Int32" />
+    <Property Name="mp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="load" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tl_ElectricalConnectionCategoryMaster" Relationship="Self.FK_tl_ElectricityServiceMaster_tl_ElectricalConnectionCategoryMaster" FromRole="tl_ElectricityServiceMaster" ToRole="tl_ElectricalConnectionCategoryMaster" />
+    <NavigationProperty Name="tl_HousesMaster" Relationship="Self.FK_tl_ElectricityServiceMaster_tl_HousesMaster" FromRole="tl_ElectricityServiceMaster" ToRole="tl_HousesMaster" />
+  </EntityType>
+  <EntityType Name="tl_FloorMaster">
+    <Key>
+      <PropertyRef Name="FloorId" />
+    </Key>
+    <Property Name="FloorId" Type="Int32" Nullable="false" />
+    <Property Name="FloorName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FloorDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tl_HousesMaster">
+    <Key>
+      <PropertyRef Name="UniQueHousNo" />
+    </Key>
+    <Property Name="UniQueHousNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TelephonNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ActualHouseNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HouseRegistrationdate" Type="DateTime" Precision="3" />
+    <Property Name="AreaId" Type="Int32" />
+    <Property Name="StreetId" Type="Int32" />
+    <Property Name="PlotId" Type="Int32" />
+    <Property Name="ElectricityConnstatus" Type="Boolean" />
+    <Property Name="GasConnStatus" Type="Boolean" />
+    <Property Name="WaterConnStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="C_M_P_Id" Type="Int32" />
+    <Property Name="BuildingApprovalNo" Type="Int32" />
+    <NavigationProperty Name="tl_AreaMaster" Relationship="Self.FK_tl_HousesMaster_tl_AreaMaster" FromRole="tl_HousesMaster" ToRole="tl_AreaMaster" />
+    <NavigationProperty Name="tl_BuildingpropertyTaxMaster" Relationship="Self.FK_tl_BuildingpropertyTaxMaster_tl_HousesMaster" FromRole="tl_HousesMaster" ToRole="tl_BuildingpropertyTaxMaster" />
+    <NavigationProperty Name="tl_ElectricityServiceMaster" Relationship="Self.FK_tl_ElectricityServiceMaster_tl_HousesMaster" FromRole="tl_HousesMaster" ToRole="tl_ElectricityServiceMaster" />
+    <NavigationProperty Name="tl_StreetMaster" Relationship="Self.FK_tl_HousesMaster_tl_StreetMaster" FromRole="tl_HousesMaster" ToRole="tl_StreetMaster" />
+  </EntityType>
+  <EntityType Name="tl_HouseTypeMaster">
+    <Key>
+      <PropertyRef Name="HouseTypeId" />
+    </Key>
+    <Property Name="HouseTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HouseTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HouseTypeAbbr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HouseTypeDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tl_LocalityMaster">
+    <Key>
+      <PropertyRef Name="LocalityId" />
+    </Key>
+    <Property Name="LocalityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LocalityName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LocalityDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LocalitySpan" Type="Int32" />
+    <Property Name="LocalityAbbr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AreaId" Type="Int32" />
+    <Property Name="LocalityIdentityDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tl_AreaMaster" Relationship="Self.FK_tl_LocalityMaster_tl_AreaMaster" FromRole="tl_LocalityMaster" ToRole="tl_AreaMaster" />
+  </EntityType>
+  <EntityType Name="tl_MunicipalityTaxMaster">
+    <Key>
+      <PropertyRef Name="UniqueMunicipalityTaxNo" />
+    </Key>
+    <Property Name="UniqueMunicipalityTaxNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MunicipalityorpanchayatorcorporatioNo" Type="Int32" />
+    <Property Name="UniqueHouseNo" Type="Int32" />
+    <Property Name="TaxAssenmentNo" Type="Int32" />
+    <Property Name="LocalityId" Type="Int32" />
+    <Property Name="RevenueCircleId" Type="Int32" />
+    <Property Name="RevenueBlockId" Type="Int32" />
+    <Property Name="BuildingApprovalNo" Type="Int32" />
+    <Property Name="NoOfFlower" Type="Int32" />
+    <Property Name="PropetyTaxvalue" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="EducationTaxValue" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="LibraryCess" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="UacPenalty" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tl_revenueCircleMaster" Relationship="Self.FK_tl_MunicipalityTaxMaster_tl_MunicipalityTaxMaster" FromRole="tl_MunicipalityTaxMaster" ToRole="tl_revenueCircleMaster" />
+    <NavigationProperty Name="tl_RevenueBlockMaster" Relationship="Self.FK_tl_MunicipalityTaxMaster_tl_RevenueBlockMaster" FromRole="tl_MunicipalityTaxMaster" ToRole="tl_RevenueBlockMaster" />
+    <NavigationProperty Name="tl_MunicipalityTaxMasterDetails" Relationship="Self.FK_tl_MunicipalityTaxMasterDetails_tl_MunicipalityTaxMaster" FromRole="tl_MunicipalityTaxMaster" ToRole="tl_MunicipalityTaxMasterDetails" />
+  </EntityType>
+  <EntityType Name="tl_MunicipalityTaxMasterDetails">
+    <Key>
+      <PropertyRef Name="MunicipaliltyTaxPaymentId" />
+    </Key>
+    <Property Name="MunicipaliltyTaxPaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MunicipalityTaxpayDate" Type="DateTime" Precision="3" />
+    <Property Name="UniqueMunicipalityNo" Type="Int32" />
+    <Property Name="Paymenttype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="paymentcibfirmedstatus" Type="Boolean" />
+    <Property Name="paymentAmount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="AnyRemarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tl_MunicipalityTaxMaster" Relationship="Self.FK_tl_MunicipalityTaxMasterDetails_tl_MunicipalityTaxMaster" FromRole="tl_MunicipalityTaxMasterDetails" ToRole="tl_MunicipalityTaxMaster" />
+  </EntityType>
+  <EntityType Name="tl_PLotMaster">
+    <Key>
+      <PropertyRef Name="PlotId" />
+    </Key>
+    <Property Name="PlotId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PlotOwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TelephoneNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PlotDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AreaId" Type="Int32" />
+    <Property Name="StreetId" Type="Int32" />
+    <Property Name="PlotRegistrationDate" Type="DateTime" Precision="3" />
+    <Property Name="C_M_P_Id" Type="Int32" />
+    <NavigationProperty Name="tl_AreaMaster" Relationship="Self.FK_tl_PLotMaster_tl_AreaMaster" FromRole="tl_PLotMaster" ToRole="tl_AreaMaster" />
+    <NavigationProperty Name="tl_StreetMaster" Relationship="Self.FK_tl_PLotMaster_tl_StreetMaster1" FromRole="tl_PLotMaster" ToRole="tl_StreetMaster" />
+  </EntityType>
+  <EntityType Name="tl_RevenueBlockMaster">
+    <Key>
+      <PropertyRef Name="RevenueBlockId" />
+    </Key>
+    <Property Name="RevenueBlockId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RevenueBlockName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RevenueBlockSpan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RevenueDesc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="RevenueBlockAbbr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RevenueBlockIdentifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="RevenueCircleId" Type="Int32" />
+    <NavigationProperty Name="tl_MunicipalityTaxMaster" Relationship="Self.FK_tl_MunicipalityTaxMaster_tl_RevenueBlockMaster" FromRole="tl_RevenueBlockMaster" ToRole="tl_MunicipalityTaxMaster" />
+    <NavigationProperty Name="tl_revenueCircleMaster" Relationship="Self.FK_tl_RevenueBlockMaster_tl_revenueCircleMaster" FromRole="tl_RevenueBlockMaster" ToRole="tl_revenueCircleMaster" />
+  </EntityType>
+  <EntityType Name="tl_revenueCircleMaster">
+    <Key>
+      <PropertyRef Name="RevenueCircleid" />
+    </Key>
+    <Property Name="RevenueCircleid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RevenueCircleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RevenueCircleDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RevenueCircleSpan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RevenueCircleIdentifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="RevenueAbbr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tl_MunicipalityTaxMaster" Relationship="Self.FK_tl_MunicipalityTaxMaster_tl_MunicipalityTaxMaster" FromRole="tl_revenueCircleMaster" ToRole="tl_MunicipalityTaxMaster" />
+    <NavigationProperty Name="tl_RevenueBlockMaster" Relationship="Self.FK_tl_RevenueBlockMaster_tl_revenueCircleMaster" FromRole="tl_revenueCircleMaster" ToRole="tl_RevenueBlockMaster" />
+  </EntityType>
+  <EntityType Name="tl_StreetMaster">
+    <Key>
+      <PropertyRef Name="StreetId" />
+    </Key>
+    <Property Name="StreetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StreetSpan" Type="Int32" />
+    <Property Name="StreetTypeId" Type="Int32" />
+    <Property Name="StreetIdentiDate" Type="DateTime" Precision="3" />
+    <Property Name="C_M_P_Id" Type="Int32" />
+    <NavigationProperty Name="tl_BuildingApprovalMaster" Relationship="Self.FK_tl_BuildingApprovalMaster_tl_StreetMaster" FromRole="tl_StreetMaster" ToRole="tl_BuildingApprovalMaster" />
+    <NavigationProperty Name="tl_HousesMaster" Relationship="Self.FK_tl_HousesMaster_tl_StreetMaster" FromRole="tl_StreetMaster" ToRole="tl_HousesMaster" />
+    <NavigationProperty Name="tl_PLotMaster" Relationship="Self.FK_tl_PLotMaster_tl_StreetMaster1" FromRole="tl_StreetMaster" ToRole="tl_PLotMaster" />
+    <NavigationProperty Name="tl_StreetTypeMaster" Relationship="Self.FK_tl_StreetMaster_tl_StreetTypeMaster" FromRole="tl_StreetMaster" ToRole="tl_StreetTypeMaster" />
+  </EntityType>
+  <EntityType Name="tl_StreetTypeMaster">
+    <Key>
+      <PropertyRef Name="StreetTypeId" />
+    </Key>
+    <Property Name="StreetTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StreetTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StreetTypeAbbr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StreetTypeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tl_StreetMaster" Relationship="Self.FK_tl_StreetMaster_tl_StreetTypeMaster" FromRole="tl_StreetTypeMaster" ToRole="tl_StreetMaster" />
+  </EntityType>
+  <Association Name="FK_tl_AreaMaster_tl_AreaTypeMaster">
+    <End Role="tl_AreaTypeMaster" Type="Self.tl_AreaTypeMaster" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tl_AreaMaster" Type="Self.tl_AreaMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_AreaTypeMaster">
+        <PropertyRef Name="AreaTypeId" />
+      </Principal>
+      <Dependent Role="tl_AreaMaster">
+        <PropertyRef Name="AreaTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_BuildingApprovalMaster_tl_AreaMaster">
+    <End Role="tl_AreaMaster" Type="Self.tl_AreaMaster" Multiplicity="0..1" />
+    <End Role="tl_BuildingApprovalMaster" Type="Self.tl_BuildingApprovalMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_AreaMaster">
+        <PropertyRef Name="AreaId" />
+      </Principal>
+      <Dependent Role="tl_BuildingApprovalMaster">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_HousesMaster_tl_AreaMaster">
+    <End Role="tl_AreaMaster" Type="Self.tl_AreaMaster" Multiplicity="0..1" />
+    <End Role="tl_HousesMaster" Type="Self.tl_HousesMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_AreaMaster">
+        <PropertyRef Name="AreaId" />
+      </Principal>
+      <Dependent Role="tl_HousesMaster">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_LocalityMaster_tl_AreaMaster">
+    <End Role="tl_AreaMaster" Type="Self.tl_AreaMaster" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tl_LocalityMaster" Type="Self.tl_LocalityMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_AreaMaster">
+        <PropertyRef Name="AreaId" />
+      </Principal>
+      <Dependent Role="tl_LocalityMaster">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_PLotMaster_tl_AreaMaster">
+    <End Role="tl_AreaMaster" Type="Self.tl_AreaMaster" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tl_PLotMaster" Type="Self.tl_PLotMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_AreaMaster">
+        <PropertyRef Name="AreaId" />
+      </Principal>
+      <Dependent Role="tl_PLotMaster">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_BuildingApprovalMaster_tl_StreetMaster">
+    <End Role="tl_StreetMaster" Type="Self.tl_StreetMaster" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tl_BuildingApprovalMaster" Type="Self.tl_BuildingApprovalMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_StreetMaster">
+        <PropertyRef Name="StreetId" />
+      </Principal>
+      <Dependent Role="tl_BuildingApprovalMaster">
+        <PropertyRef Name="StreetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_Buildingfloormaster_tl_BuildingApprovalMaster">
+    <End Role="tl_BuildingApprovalMaster" Type="Self.tl_BuildingApprovalMaster" Multiplicity="1" />
+    <End Role="tl_Buildingfloormaster" Type="Self.tl_Buildingfloormaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_BuildingApprovalMaster">
+        <PropertyRef Name="BuildingApprNo" />
+      </Principal>
+      <Dependent Role="tl_Buildingfloormaster">
+        <PropertyRef Name="BuildingApprno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_BuildingpropertyTaxMaster_tl_BuildingApprovalMaster">
+    <End Role="tl_BuildingApprovalMaster" Type="Self.tl_BuildingApprovalMaster" Multiplicity="0..1" />
+    <End Role="tl_BuildingpropertyTaxMaster" Type="Self.tl_BuildingpropertyTaxMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_BuildingApprovalMaster">
+        <PropertyRef Name="BuildingApprNo" />
+      </Principal>
+      <Dependent Role="tl_BuildingpropertyTaxMaster">
+        <PropertyRef Name="BuildingNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_BuildingpropertyTaxMaster_tl_HousesMaster">
+    <End Role="tl_HousesMaster" Type="Self.tl_HousesMaster" Multiplicity="0..1" />
+    <End Role="tl_BuildingpropertyTaxMaster" Type="Self.tl_BuildingpropertyTaxMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_HousesMaster">
+        <PropertyRef Name="UniQueHousNo" />
+      </Principal>
+      <Dependent Role="tl_BuildingpropertyTaxMaster">
+        <PropertyRef Name="UniqueHouseNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_ElectricityServiceMaster_tl_ElectricalConnectionCategoryMaster">
+    <End Role="tl_ElectricalConnectionCategoryMaster" Type="Self.tl_ElectricalConnectionCategoryMaster" Multiplicity="0..1" />
+    <End Role="tl_ElectricityServiceMaster" Type="Self.tl_ElectricityServiceMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_ElectricalConnectionCategoryMaster">
+        <PropertyRef Name="ConnectionCategoryId" />
+      </Principal>
+      <Dependent Role="tl_ElectricityServiceMaster">
+        <PropertyRef Name="ConncetionCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_ElectricityServiceMaster_tl_HousesMaster">
+    <End Role="tl_HousesMaster" Type="Self.tl_HousesMaster" Multiplicity="1" />
+    <End Role="tl_ElectricityServiceMaster" Type="Self.tl_ElectricityServiceMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_HousesMaster">
+        <PropertyRef Name="UniQueHousNo" />
+      </Principal>
+      <Dependent Role="tl_ElectricityServiceMaster">
+        <PropertyRef Name="UniqueHouseno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_HousesMaster_tl_StreetMaster">
+    <End Role="tl_StreetMaster" Type="Self.tl_StreetMaster" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tl_HousesMaster" Type="Self.tl_HousesMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_StreetMaster">
+        <PropertyRef Name="StreetId" />
+      </Principal>
+      <Dependent Role="tl_HousesMaster">
+        <PropertyRef Name="StreetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_MunicipalityTaxMaster_tl_MunicipalityTaxMaster">
+    <End Role="tl_revenueCircleMaster" Type="Self.tl_revenueCircleMaster" Multiplicity="0..1" />
+    <End Role="tl_MunicipalityTaxMaster" Type="Self.tl_MunicipalityTaxMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_revenueCircleMaster">
+        <PropertyRef Name="RevenueCircleid" />
+      </Principal>
+      <Dependent Role="tl_MunicipalityTaxMaster">
+        <PropertyRef Name="RevenueCircleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_MunicipalityTaxMaster_tl_RevenueBlockMaster">
+    <End Role="tl_RevenueBlockMaster" Type="Self.tl_RevenueBlockMaster" Multiplicity="0..1" />
+    <End Role="tl_MunicipalityTaxMaster" Type="Self.tl_MunicipalityTaxMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_RevenueBlockMaster">
+        <PropertyRef Name="RevenueBlockId" />
+      </Principal>
+      <Dependent Role="tl_MunicipalityTaxMaster">
+        <PropertyRef Name="RevenueBlockId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_MunicipalityTaxMasterDetails_tl_MunicipalityTaxMaster">
+    <End Role="tl_MunicipalityTaxMaster" Type="Self.tl_MunicipalityTaxMaster" Multiplicity="0..1" />
+    <End Role="tl_MunicipalityTaxMasterDetails" Type="Self.tl_MunicipalityTaxMasterDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_MunicipalityTaxMaster">
+        <PropertyRef Name="UniqueMunicipalityTaxNo" />
+      </Principal>
+      <Dependent Role="tl_MunicipalityTaxMasterDetails">
+        <PropertyRef Name="UniqueMunicipalityNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_PLotMaster_tl_StreetMaster1">
+    <End Role="tl_StreetMaster" Type="Self.tl_StreetMaster" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tl_PLotMaster" Type="Self.tl_PLotMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_StreetMaster">
+        <PropertyRef Name="StreetId" />
+      </Principal>
+      <Dependent Role="tl_PLotMaster">
+        <PropertyRef Name="StreetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_RevenueBlockMaster_tl_revenueCircleMaster">
+    <End Role="tl_revenueCircleMaster" Type="Self.tl_revenueCircleMaster" Multiplicity="0..1" />
+    <End Role="tl_RevenueBlockMaster" Type="Self.tl_RevenueBlockMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_revenueCircleMaster">
+        <PropertyRef Name="RevenueCircleid" />
+      </Principal>
+      <Dependent Role="tl_RevenueBlockMaster">
+        <PropertyRef Name="RevenueCircleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tl_StreetMaster_tl_StreetTypeMaster">
+    <End Role="tl_StreetTypeMaster" Type="Self.tl_StreetTypeMaster" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tl_StreetMaster" Type="Self.tl_StreetMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tl_StreetTypeMaster">
+        <PropertyRef Name="StreetTypeId" />
+      </Principal>
+      <Dependent Role="tl_StreetMaster">
+        <PropertyRef Name="StreetTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="projecttEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tbl_UserMaster" EntityType="Self.tbl_UserMaster" />
+    <EntitySet Name="tl_AreaMaster" EntityType="Self.tl_AreaMaster" />
+    <EntitySet Name="tl_AreaTypeMaster" EntityType="Self.tl_AreaTypeMaster" />
+    <EntitySet Name="tl_BuildingApprovalMaster" EntityType="Self.tl_BuildingApprovalMaster" />
+    <EntitySet Name="tl_Buildingfloormaster" EntityType="Self.tl_Buildingfloormaster" />
+    <EntitySet Name="tl_BuildingpropertyTaxMaster" EntityType="Self.tl_BuildingpropertyTaxMaster" />
+    <EntitySet Name="tl_Categoryusagemaster" EntityType="Self.tl_Categoryusagemaster" />
+    <EntitySet Name="tl_ElectricalConnectionCategoryMaster" EntityType="Self.tl_ElectricalConnectionCategoryMaster" />
+    <EntitySet Name="tl_ElectricalEquipmentMaster" EntityType="Self.tl_ElectricalEquipmentMaster" />
+    <EntitySet Name="tl_electricalmeterreadingmaster" EntityType="Self.tl_electricalmeterreadingmaster" />
+    <EntitySet Name="tl_ElectricityServiceMaster" EntityType="Self.tl_ElectricityServiceMaster" />
+    <EntitySet Name="tl_FloorMaster" EntityType="Self.tl_FloorMaster" />
+    <EntitySet Name="tl_HousesMaster" EntityType="Self.tl_HousesMaster" />
+    <EntitySet Name="tl_HouseTypeMaster" EntityType="Self.tl_HouseTypeMaster" />
+    <EntitySet Name="tl_LocalityMaster" EntityType="Self.tl_LocalityMaster" />
+    <EntitySet Name="tl_MunicipalityTaxMaster" EntityType="Self.tl_MunicipalityTaxMaster" />
+    <EntitySet Name="tl_MunicipalityTaxMasterDetails" EntityType="Self.tl_MunicipalityTaxMasterDetails" />
+    <EntitySet Name="tl_PLotMaster" EntityType="Self.tl_PLotMaster" />
+    <EntitySet Name="tl_RevenueBlockMaster" EntityType="Self.tl_RevenueBlockMaster" />
+    <EntitySet Name="tl_revenueCircleMaster" EntityType="Self.tl_revenueCircleMaster" />
+    <EntitySet Name="tl_StreetMaster" EntityType="Self.tl_StreetMaster" />
+    <EntitySet Name="tl_StreetTypeMaster" EntityType="Self.tl_StreetTypeMaster" />
+    <AssociationSet Name="FK_tl_AreaMaster_tl_AreaTypeMaster" Association="Self.FK_tl_AreaMaster_tl_AreaTypeMaster">
+      <End Role="tl_AreaTypeMaster" EntitySet="tl_AreaTypeMaster" />
+      <End Role="tl_AreaMaster" EntitySet="tl_AreaMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_BuildingApprovalMaster_tl_AreaMaster" Association="Self.FK_tl_BuildingApprovalMaster_tl_AreaMaster">
+      <End Role="tl_AreaMaster" EntitySet="tl_AreaMaster" />
+      <End Role="tl_BuildingApprovalMaster" EntitySet="tl_BuildingApprovalMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_HousesMaster_tl_AreaMaster" Association="Self.FK_tl_HousesMaster_tl_AreaMaster">
+      <End Role="tl_AreaMaster" EntitySet="tl_AreaMaster" />
+      <End Role="tl_HousesMaster" EntitySet="tl_HousesMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_LocalityMaster_tl_AreaMaster" Association="Self.FK_tl_LocalityMaster_tl_AreaMaster">
+      <End Role="tl_AreaMaster" EntitySet="tl_AreaMaster" />
+      <End Role="tl_LocalityMaster" EntitySet="tl_LocalityMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_PLotMaster_tl_AreaMaster" Association="Self.FK_tl_PLotMaster_tl_AreaMaster">
+      <End Role="tl_AreaMaster" EntitySet="tl_AreaMaster" />
+      <End Role="tl_PLotMaster" EntitySet="tl_PLotMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_BuildingApprovalMaster_tl_StreetMaster" Association="Self.FK_tl_BuildingApprovalMaster_tl_StreetMaster">
+      <End Role="tl_StreetMaster" EntitySet="tl_StreetMaster" />
+      <End Role="tl_BuildingApprovalMaster" EntitySet="tl_BuildingApprovalMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_Buildingfloormaster_tl_BuildingApprovalMaster" Association="Self.FK_tl_Buildingfloormaster_tl_BuildingApprovalMaster">
+      <End Role="tl_BuildingApprovalMaster" EntitySet="tl_BuildingApprovalMaster" />
+      <End Role="tl_Buildingfloormaster" EntitySet="tl_Buildingfloormaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_BuildingpropertyTaxMaster_tl_BuildingApprovalMaster" Association="Self.FK_tl_BuildingpropertyTaxMaster_tl_BuildingApprovalMaster">
+      <End Role="tl_BuildingApprovalMaster" EntitySet="tl_BuildingApprovalMaster" />
+      <End Role="tl_BuildingpropertyTaxMaster" EntitySet="tl_BuildingpropertyTaxMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_BuildingpropertyTaxMaster_tl_HousesMaster" Association="Self.FK_tl_BuildingpropertyTaxMaster_tl_HousesMaster">
+      <End Role="tl_HousesMaster" EntitySet="tl_HousesMaster" />
+      <End Role="tl_BuildingpropertyTaxMaster" EntitySet="tl_BuildingpropertyTaxMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_ElectricityServiceMaster_tl_ElectricalConnectionCategoryMaster" Association="Self.FK_tl_ElectricityServiceMaster_tl_ElectricalConnectionCategoryMaster">
+      <End Role="tl_ElectricalConnectionCategoryMaster" EntitySet="tl_ElectricalConnectionCategoryMaster" />
+      <End Role="tl_ElectricityServiceMaster" EntitySet="tl_ElectricityServiceMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_ElectricityServiceMaster_tl_HousesMaster" Association="Self.FK_tl_ElectricityServiceMaster_tl_HousesMaster">
+      <End Role="tl_HousesMaster" EntitySet="tl_HousesMaster" />
+      <End Role="tl_ElectricityServiceMaster" EntitySet="tl_ElectricityServiceMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_HousesMaster_tl_StreetMaster" Association="Self.FK_tl_HousesMaster_tl_StreetMaster">
+      <End Role="tl_StreetMaster" EntitySet="tl_StreetMaster" />
+      <End Role="tl_HousesMaster" EntitySet="tl_HousesMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_MunicipalityTaxMaster_tl_MunicipalityTaxMaster" Association="Self.FK_tl_MunicipalityTaxMaster_tl_MunicipalityTaxMaster">
+      <End Role="tl_revenueCircleMaster" EntitySet="tl_revenueCircleMaster" />
+      <End Role="tl_MunicipalityTaxMaster" EntitySet="tl_MunicipalityTaxMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_MunicipalityTaxMaster_tl_RevenueBlockMaster" Association="Self.FK_tl_MunicipalityTaxMaster_tl_RevenueBlockMaster">
+      <End Role="tl_RevenueBlockMaster" EntitySet="tl_RevenueBlockMaster" />
+      <End Role="tl_MunicipalityTaxMaster" EntitySet="tl_MunicipalityTaxMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_MunicipalityTaxMasterDetails_tl_MunicipalityTaxMaster" Association="Self.FK_tl_MunicipalityTaxMasterDetails_tl_MunicipalityTaxMaster">
+      <End Role="tl_MunicipalityTaxMaster" EntitySet="tl_MunicipalityTaxMaster" />
+      <End Role="tl_MunicipalityTaxMasterDetails" EntitySet="tl_MunicipalityTaxMasterDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_PLotMaster_tl_StreetMaster1" Association="Self.FK_tl_PLotMaster_tl_StreetMaster1">
+      <End Role="tl_StreetMaster" EntitySet="tl_StreetMaster" />
+      <End Role="tl_PLotMaster" EntitySet="tl_PLotMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_RevenueBlockMaster_tl_revenueCircleMaster" Association="Self.FK_tl_RevenueBlockMaster_tl_revenueCircleMaster">
+      <End Role="tl_revenueCircleMaster" EntitySet="tl_revenueCircleMaster" />
+      <End Role="tl_RevenueBlockMaster" EntitySet="tl_RevenueBlockMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tl_StreetMaster_tl_StreetTypeMaster" Association="Self.FK_tl_StreetMaster_tl_StreetTypeMaster">
+      <End Role="tl_StreetTypeMaster" EntitySet="tl_StreetTypeMaster" />
+      <End Role="tl_StreetMaster" EntitySet="tl_StreetMaster" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

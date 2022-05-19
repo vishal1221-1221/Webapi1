@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="projecttModel8" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="MuniTax">
+    <Key>
+      <PropertyRef Name="UniQueHousNo" />
+    </Key>
+    <Property Name="MunicipaliltyTaxPaymentId" Type="Int32" />
+    <Property Name="UniQueHousNo" Type="Int32" Nullable="false" />
+    <Property Name="PaymentAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fromdate" Type="DateTime" Precision="0" />
+    <Property Name="todate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityContainer Name="projecttEntities8" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="MuniTaxes" EntityType="Self.MuniTax" />
+  </EntityContainer>
+</Schema>

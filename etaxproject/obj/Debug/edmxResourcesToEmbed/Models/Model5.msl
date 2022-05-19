@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="projecttModel8StoreContainer" CdmEntityContainer="projecttEntities8">
+    <EntitySetMapping Name="MuniTaxes">
+      <EntityTypeMapping TypeName="projecttModel8.MuniTax">
+        <MappingFragment StoreEntitySet="MuniTax">
+          <ScalarProperty Name="MunicipaliltyTaxPaymentId" ColumnName="MunicipaliltyTaxPaymentId" />
+          <ScalarProperty Name="UniQueHousNo" ColumnName="UniQueHousNo" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="fromdate" ColumnName="fromdate" />
+          <ScalarProperty Name="todate" ColumnName="todate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
